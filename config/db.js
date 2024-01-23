@@ -13,5 +13,3 @@ const connectDb = async () => {
 };
 
 module.exports = connectDb;
-
-// git status check
