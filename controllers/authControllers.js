@@ -5,7 +5,7 @@ const JWT = require("jsonwebtoken");
 // REGISTER
 const registerController = async (req, res) => {
   try {
-    const { userName, email, password, phone, address } = req.body;
+    const { userName, email, password, phone, address, answer } = req.body;
     // validation
     if (!userName || !email || !password || !address || !phone) {
       return res.status(500).send({
@@ -22,7 +22,7 @@ const registerController = async (req, res) => {
         message: "Email Already Registered Please Login",
       });
     }
-
+    // hashing password
     var salt = bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -33,6 +33,7 @@ const registerController = async (req, res) => {
       password: hashedPassword,
       address,
       phone,
+      answer,
     });
     res.status(201).send({
       success: true,
