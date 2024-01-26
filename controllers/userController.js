@@ -1,3 +1,4 @@
+const { trusted } = require("mongoose");
 const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 
@@ -153,9 +154,27 @@ const resetPasswordController = async (req, res) => {
   }
 };
 
+// DELETE PROFILE ACCOUNT
+const deleteProfileController = async (req, res) => {
+  try {
+    await userModel.findOneAndDelete(req.params.id);
+    return res.status(500).send({
+      success: true,
+      message: "Your Account Has Been Deleted",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Delete Profile API",
+    });
+  }
+};
+
 module.exports = {
   getUserController,
   updateUserController,
   updatePasswordController,
   resetPasswordController,
+  deleteProfileController,
 };
