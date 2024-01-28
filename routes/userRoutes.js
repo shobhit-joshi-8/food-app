@@ -22,9 +22,9 @@ router.put("/updateUser", authMiddleware, updateUserController);
 router.post("/updatePassword", authMiddleware, updatePasswordController);
 
 // RESET PASSWORD
-router.delete("/resetPassword", authMiddleware, resetPasswordController);
+router.post("/resetPassword", authMiddleware, resetPasswordController);
 
 // DELETE USER
-router.post("user/delete/:id", authMiddleware, deleteProfileController);
+router.delete("/deleteUser/:id", authMiddleware, deleteProfileController);
 
 module.exports = router;
