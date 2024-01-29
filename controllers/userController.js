@@ -158,7 +158,7 @@ const resetPasswordController = async (req, res) => {
 const deleteProfileController = async (req, res) => {
   try {
     await userModel.findOneAndDelete(req.params.id);
-    return res.status(500).send({
+    return res.status(200).send({
       success: true,
       message: "Your Account Has Been Deleted",
     });
