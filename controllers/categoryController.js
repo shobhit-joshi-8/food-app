@@ -28,4 +28,28 @@ const createCategoryController = async (req, res) => {
   }
 };
 
-module.exports = { createCategoryController };
+// GET ALL CATEGORY
+const getAllCategoryController = async (req, res) => {
+  try {
+    const categories = await categoryModel.find({});
+    if (!categories) {
+      return res.status(404).send({
+        success: false,
+        message: "No Categories Found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      totalCategories: categories.length,
+      categories,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Get All Category API",
+      error,
+    });
+  }
+};
+module.exports = { createCategoryController, getAllCategoryController };
