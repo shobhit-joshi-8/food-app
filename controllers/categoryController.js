@@ -52,4 +52,38 @@ const getAllCategoryController = async (req, res) => {
     });
   }
 };
-module.exports = { createCategoryController, getAllCategoryController };
+
+// UPDATE CATEGORY
+const updateCategoryController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, imageUrl } = req.body;
+    const updatedCategory = await categoryModel.findByIdAndUpdate(
+      id,
+      { title, imageUrl },
+      { new: true }
+    );
+    if (!updatedCategory) {
+      return res.status(500).send({
+        success: false,
+        message: "No Category Found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      message: "Category Updated Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Update Category API",
+      error,
+    });
+  }
+};
+module.exports = {
+  createCategoryController,
+  getAllCategoryController,
+  updateCategoryController,
+};
