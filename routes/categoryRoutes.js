@@ -5,6 +5,7 @@ const {
   createCategoryController,
   getAllCategoryController,
   updateCategoryController,
+  deleteCategoryController,
 } = require("../controllers/categoryController");
 
 const router = express.Router();
@@ -18,4 +19,7 @@ router.get("/getAll", getAllCategoryController);
 
 // UPDATE CATEGORY
 router.put("/update/:id", authMiddleware, updateCategoryController);
+
+// DELETE CATEGORY
+router.delete("/delete/:id", authMiddleware, deleteCategoryController);
 module.exports = router;

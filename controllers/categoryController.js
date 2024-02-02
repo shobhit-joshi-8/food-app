@@ -82,8 +82,42 @@ const updateCategoryController = async (req, res) => {
     });
   }
 };
+
+// DELETE CATEGORY
+const deleteCategoryController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(500).send({
+        success: false,
+        message: "Please Provide Category Id",
+      });
+    }
+    const category = await categoryModel.findById(id);
+    if (!category) {
+      return res.status(500).send({
+        success: false,
+        message: "No Category Found With This Id",
+      });
+    }
+    await categoryModel.findByIdAndDelete(id);
+    res.status(200).send({
+      success: true,
+      message: "Category Deleted Successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error In Delete Category API",
+      error,
+    });
+  }
+};
+
 module.exports = {
   createCategoryController,
   getAllCategoryController,
   updateCategoryController,
+  deleteCategoryController,
 };
