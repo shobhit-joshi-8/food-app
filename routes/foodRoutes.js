@@ -6,6 +6,9 @@ const {
   getAllFoodController,
   getSingleFoodController,
   getFoodByRestaurantController,
+  updateFoodController,
+  deleteFoodController,
+  placeOrderController,
 } = require("../controllers/foodController");
 
 const router = express.Router();
@@ -22,5 +25,14 @@ router.get("/get/:id", getSingleFoodController);
 
 // GET SINGLE FOOD
 router.get("/getByRestaurant/:id", getFoodByRestaurantController);
+
+// UPDATE FOOD
+router.put("/update/:id", authMiddleware, updateFoodController);
+
+// DELETE FOOD
+router.delete("/delete/:id", authMiddleware, deleteFoodController);
+
+// PLACE ORDER
+router.post("/placeorder", authMiddleware, placeOrderController);
 
 module.exports = router;
