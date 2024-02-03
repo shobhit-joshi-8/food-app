@@ -46,7 +46,7 @@ const updateUserController = async (req, res) => {
       });
     }
     // update
-    const { userName, address, phone } = req.body;
+    const { userName, address, phone, userType } = req.body;
     if (userName) {
       user.userName = userName;
     }
@@ -55,6 +55,9 @@ const updateUserController = async (req, res) => {
     }
     if (phone) {
       user.phone = phone;
+    }
+    if (userType) {
+      user.userType = userType;
     }
     // save
     await user.save();
